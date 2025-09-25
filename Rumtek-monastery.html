@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumtek Monastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .bg-gradient-blue {
+            background-image: linear-gradient(90deg, #09346d 0%, #0c4d9b 100%);
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .embed-container { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+        } 
+        .embed-container iframe, .embed-container object, .embed-container embed { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-gradient-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <!-- Logo -->
+                <img src="https://www.makemytrip.com/image/mmt-logo-white.png" alt="MakeMyTrip Logo" class="h-10 mr-4">
+                
+                <!-- Nav Links -->
+                <nav class="hidden lg:flex items-center space-x-6 text-base font-medium">
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/airplane-mode-on.png" class="h-6 w-6 mb-1" alt="Flights icon">
+                        <span class="group-hover:underline">Flights</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/building.png" class="h-6 w-6 mb-1" alt="Hotels icon">
+                        <span class="group-hover:underline">Hotels</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/home.png" class="h-6 w-6 mb-1" alt="Homestays icon">
+                        <span class="group-hover:underline">Homestays</span>
+                    </a>
+                    
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/train.png" class="h-6 w-6 mb-1" alt="Trains icon">
+                        <span class="group-hover:underline">Trains</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/bus.png" class="h-6 w-6 mb-1" alt="Buses icon">
+                        <span class="group-hover:underline">Buses</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/car.png" class="h-6 w-6 mb-1" alt="Cabs icon">
+                        <span class="group-hover:underline">Cabs</span>
+                    </a>
+                    
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/travel-insurance.png" class="h-6 w-6 mb-1" alt="Travel Insurance icon">
+                        <span class="group-hover:underline">Travel Insurance</span>
+                    </a>
+                    <a href="#" class="flex items-center text-lg">
+                        <span>...</span>
+                    </a>
+                    <a href="#" class="flex items-center text-base">
+                        <span>More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Actions -->
+            <div id="auth-ui" class="flex items-center space-x-4">
+                <a id="login-btn-header" href="#" class="flex items-center text-base font-medium">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" class="h-6 w-6 mr-1" alt="User icon">
+                    <span>Login or Create Account</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Photo Banner Section -->
+    <div id="photo-banner" class="container mx-auto px-4 py-8 flex space-x-4 fade-in">
+        <!-- First div with one photo -->
+        <div id="first-div" class="flex-1 rounded-lg shadow-md overflow-hidden h-96 hover-lift transition-all duration-500">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="Rumtek Monastery, Gangtok Guide - What to do, When to visit, How to reach, Cost  Tripspell.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Third div with one photo -->
+        <div id="third-div" class="flex-1 rounded-lg shadow-md overflow-hidden h-96 hover-lift transition-all duration-500 cursor-pointer">
+            <div class='embed-container'><iframe src='https://momento360.com/e/u/30946d2b1ac2469eb482eab52f634b90?utm_campaign=embed&utm_source=other&heading=258.77&pitch=-5.36&field-of-view=73.1&size=medium&display-plan=true' style='border:0'></iframe></div>
+        </div>
+    </div>
+    
+    <!-- Rumtek Monastery Info Section -->
+    <main class="container mx-auto px-4 py-8 fade-in">
+        <section class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h1 class="text-4xl font-bold text-center text-gray-800">Rumtek Monastery - The Dharma Chakra Centre</h1>
+            <p class="text-center text-gray-600 mt-4 mb-8 max-w-2xl mx-auto text-lg">Rumtek Monastery, the largest and most significant monastery in Sikkim, is the heart of the Karma Kagyu lineage in exile. Its significance lies in its role as a spiritual and cultural hub, housing rare religious art and texts, and serving as a center for Buddhist study and practice.</p>
+        </section>
+
+        <section id="history" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">History & Significance</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <p class="text-gray-700 mb-4 text-base">The original Rumtek Monastery was founded in the 16th century by the 9th Karmapa, Wangchuk Dorje, but was largely in ruins by the mid-20th century. After fleeing Tibet in 1959, the 16th Karmapa, Rangjung Rigpe Dorje, chose the site to establish his new seat. With the support of the Sikkimese royal family and the Indian government, he rebuilt the monastery, mirroring the design of the Tsurphu Monastery, the Karma Kagyu's traditional seat in Tibet. The monastery was officially inaugurated in 1966.</p>
+                    <p class="text-gray-700 text-base">The monastery is a living symbol of the preservation of Tibetan Buddhism in exile. It houses a community of monks, a monastic college (Karma Shri Nalanda Institute for Higher Buddhist Studies), and a golden stupa containing the relics of the 16th Karmapa.</p>
+                </div>
+                <div class="md:w-1/2 rounded-lg pl-4">
+                    <img src="rumtek-qr.png" alt="Rumtek Monastery building" class="w-[600px] pl-32">
+                </div>
+            </div>
+        </section>
+
+        <section id="rituals" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Festivals, Events, and Rituals</h2>
+            <p class="text-center text-gray-700 mb-6 text-base">The monastery is a center for various rituals and celebrations that follow the Tibetan Buddhist calendar. These events are often marked by sacred masked dances, known as **Chaam**, which are a major attraction for visitors.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-red-500">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Losar (Tibetan New Year) & Gutor Chaam</h3>
+                    <p class="text-gray-700 mb-2 text-base">Usually in February or March, this is one of the most significant festivals. It's preceded by the Gutor Chaam, a ritual dance performed two days before Losar to symbolize the triumph of good over evil.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Tsechu Chaam</h3>
+                    <p class="text-gray-700 mb-2 text-base">Held on the 10th day of the 5th Tibetan lunar month (around June), this festival honors Guru Padmasambhava and features masked dances depicting his eight manifestations.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Kagyed Chaam</h3>
+                    <p class="text-gray-700 mb-2 text-base">This dance festival, typically held in December, is performed on the 28th and 29th days of the 10th Tibetan lunar month. Monks perform dances to ward off evil and offer prayers for the well-being of all sentient beings.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Cultural Calendar</h2>
+            <p class="text-center text-gray-700 mb-6 text-base">Experience the spiritual rhythms of Rumtek by planning your visit around these significant dates. (Note: Dates are approximate and based on the Tibetan lunar calendar, so they change each year.)</p>
+            <div class="flex flex-wrap md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flex-1 min-w-[200px] p-4 bg-gray-50 rounded-lg border-t-4 border-blue-600 shadow-sm text-center">
+                    <h3 class="font-semibold text-gray-800 mb-1 text-lg">January - March</h3>
+                    <p class="text-sm text-gray-600">Losar & Gutor Chaam</p>
+                </div>
+                <div class="flex-1 min-w-[200px] p-4 bg-gray-50 rounded-lg border-t-4 border-purple-600 shadow-sm text-center">
+                    <h3 class="font-semibold text-gray-800 mb-1 text-lg">April - June</h3>
+                    <p class="text-sm text-gray-600">Saga Dawa & Tsechu Chaam</p>
+                </div>
+                <div class="flex-1 min-w-[200px] p-4 bg-gray-50 rounded-lg border-t-4 border-teal-600 shadow-sm text-center">
+                    <h3 class="font-semibold text-gray-800 mb-1 text-lg">July - September</h3>
+                    <p class="text-sm text-gray-600">Drukpa Teshi & Pang Lhabsol</p>
+                </div>
+                <div class="flex-1 min-w-[200px] p-4 bg-gray-50 rounded-lg border-t-4 border-amber-600 shadow-sm text-center">
+                    <h3 class="font-semibold text-gray-800 mb-1 text-lg">October - December</h3>
+                    <p class="text-sm text-gray-600">Lhabab Duchen & Kagyed Chaam</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="visit" class="bg-white p-8 rounded-lg shadow-lg hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Plan Your Visit</h2>
+            <ul class="space-y-4 text-gray-700">
+                <li><p class="text-base">The monastery is open to visitors daily from 6:00 AM to 6:00 PM. A nominal entry fee may apply. Please observe silence and respect the sacred nature of the site. Photography may be restricted in certain areas.</p></li>
+                <li><p class="text-base"><strong>How to Reach:</strong> Rumtek is about 24 kilometers from Gangtok. Taxis are readily available from the city center.</p></li>
+                <li><p class="text-base"><strong>Dress Code:</strong> Please dress modestly, covering your shoulders and knees, to show respect for the monastic community.</p></li>
+            </ul>
+        </section>
+    </main>
+    <footer class="bg-gray-900 text-gray-300 py-10 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Popular Holiday Packages -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Popular Holiday Packages</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Darjeeling Tour Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Sikkim Tour Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Dooars Wildlife Tours</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Bhutan Heritage Tours</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Kalimpong Tour Packages</a></li>
+                    </ul>
+                </div>
+                <!-- Travel Services -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Travel Services</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Tailored Holiday Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Car Rental & Transport</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Government Resorts</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Hotel & Homestay Booking</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Services We Provide</a></li>
+                    </ul>
+                </div>
+                <!-- Explore Destinations -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Explore Destinations</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Top Tourist Attractions</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Unexplored Destinations</a></li>
+                    </ul>
+                </div>
+                <!-- Get in Touch -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get in Touch</h3>
+                    <div class="text-sm space-y-2">
+                        <p class="text-white">North Bengal Tourism®</p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/new-post.png" alt="Email icon" class="w-4 h-4 mr-2"> <a href="#" class="hover:text-white transition-colors">help@northbengaltourism.com</a></p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/phone.png" alt="Phone icon" class="w-4 h-4 mr-2"> <span>+91 81455 84286</span></p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/marker.png" alt="Location icon" class="w-4 h-4 mr-2"> <span>Siliguri, West Bengal, India</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Row of Footer -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <!-- About Our Company -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">About Our Company</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Who We Are</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Contact Us</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Travel Blog</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Help & FAQs</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Client Testimonials</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Our Achievements</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Careers & Opportunities</a></li>
+                    </ul>
+                </div>
+                <!-- Our Policies -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Our Policies</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Legal Disclaimer</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Cancellation & Refund Policy</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Privacy & Data Protection</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
+                <p>&copy; 2024 North Bengal Tourism. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstDiv = document.getElementById('first-div');
+            const thirdDiv = document.getElementById('third-div');
+            let isExpanded = false;
+
+            thirdDiv.addEventListener('click', () => {
+                if (isExpanded) {
+                    // Revert to original state
+                    firstDiv.classList.remove('hidden');
+                    firstDiv.classList.add('flex-1');
+                    thirdDiv.classList.remove('w-full');
+                    thirdDiv.classList.add('flex-1');
+                    isExpanded = false;
+                } else {
+                    // Expand the third div and hide the first one
+                    firstDiv.classList.remove('flex-1');
+                    firstDiv.classList.add('hidden');
+                    thirdDiv.classList.remove('flex-1');
+                    thirdDiv.classList.add('w-full');
+                    isExpanded = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

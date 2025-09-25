@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .bg-gradient-blue {
+            background-image: linear-gradient(90deg, #09346d 0%, #0c4d9b 100%);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #2563eb;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-gradient-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <!-- Logo -->
+                <img src="360.jpg" alt="MakeMyTrip Logo" class="h-10 mr-4">
+                
+                <!-- Nav Links -->
+                <nav class="hidden lg:flex items-center space-x-6 text-base font-medium">
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/airplane-mode-on.png" class="h-6 w-6 mb-1" alt="Flights icon">
+                        <span>Flights</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/building.png" class="h-6 w-6 mb-1" alt="Hotels icon">
+                        <span>Hotels</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/home.png" class="h-6 w-6 mb-1" alt="Homestays icon">
+                        <span>Homestays</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center border-b-2 border-white pb-1">
+                        <img src="luggage.png" class="h-6 w-6 mb-1" alt="Holiday Packages icon">
+                        <span>Holiday Packages</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/train.png" class="h-6 w-6 mb-1" alt="Trains icon">
+                        <span>Trains</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/bus.png" class="h-6 w-6 mb-1" alt="Buses icon">
+                        <span>Buses</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/car.png" class="h-6 w-6 mb-1" alt="Cabs icon">
+                        <span>Cabs</span>
+                    </a>
+                    
+                    <a href="#" class="flex flex-col items-center">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/travel-insurance.png" class="h-6 w-6 mb-1" alt="Travel Insurance icon">
+                        <span>Travel Insurance</span>
+                    </a>
+                    <a href="#" class="flex items-center text-lg">
+                        <span>...</span>
+                    </a>
+                    <a href="#" class="flex items-center text-base">
+                        <span>More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Actions -->
+            <div id="auth-ui" class="flex items-center space-x-4">
+                <a id="login-btn-header" href="#" class="flex items-center text-base font-medium">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" class="h-6 w-6 mr-1" alt="User icon">
+                    <span>Login or Create Account</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Search Bar -->
+    <main class="relative bg-gradient-blue text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="absolute inset-0 z-0">
+                <img src="https://www.makemytrip.com/promos/hero_image_for_search_sikkim.jpg" alt="Sikkim landscape" class="w-full h-full object-cover opacity-30">
+            </div>
+            <div class="relative z-10">
+                <h1 class="text-4xl font-bold mb-8">Sikkim Tour Packages</h1>
+
+                <!-- Search Form -->
+                <div class="bg-white p-4 rounded-lg shadow-lg flex flex-col md:flex-row items-center justify-between text-gray-800 space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="flex-1 w-full">
+                        <label for="starting-from" class="text-xs font-semibold text-gray-500 block mb-1">STARTING FROM</label>
+                        <select name="Country" id="starting-from" class="w-full text-lg font-medium outline-none">
+                            <option value="">Andhra Pradesh</option>
+                            <option value="">Arunachal Pradesh</option>
+                            <option value="">Assam</option>
+                            <option value="">Bihar</option>
+                            <option value="">Chhattisgarh</option>
+                            <option value="">Goa</option>
+                            <option value="">Gujarat</option>
+                            <option value="">Haryana</option>
+                            <option value="">Himachal Pradesh</option>
+                            
+                            <option value="">Jharkhand</option>
+                            <option value="">Karnataka</option>
+                            <option value="">Kerala</option>
+                            <option value="">Madhya Pradesh</option>
+                            <option value="">Maharashtra</option>
+                            <option value="">Manipur</option>
+                            <option value="">Meghalaya</option>
+                            <option value="">Mizoram</option>
+                            <option value="">Nagaland</option>
+                            <option value="">Orissa</option>
+                            <option value="">Punjab</option>
+                            <option value="">Rajasthan</option>
+                            <option value="">Sikkim</option>
+                            <option value="">Tamil Nadu</option>
+                            <option value="">Telangana</option>
+                            <option value="">Tripura</option>
+                            <option value="">Uttar Pradesh</option>
+                            <option value="">Uttarakhand</option>
+                            <option value="">West Bengak</option>
+                        </select>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <label for="going-to" class="text-xs font-semibold text-gray-500 block mb-1">GOING TO</label>
+                        <input type="text" id="going-to" value="Sikkim" class="w-full text-lg font-medium outline-none">
+                    </div>
+                    <div class="flex-1 w-full">
+                        <label for="starting-date" class="text-xs font-semibold text-gray-500 block mb-1">STARTING DATE</label>
+                        <input type="date" id="starting-date" placeholder="Select" class="w-full text-lg font-medium outline-none">
+                    </div>
+                    <button id="search-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors w-full md:w-auto">SEARCH</button>
+                    <div class="hidden md:flex items-center justify-center space-x-2 text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <a href="#" class="text-sm font-semibold">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto px-4 py-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
+        
+        <!-- Sidebar - Filters -->
+        <aside class="lg:w-1/4 h-screen overflow-y-auto">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4">FILTERS</h2>
+                <div class="space-y-4">
+                    
+                    <!-- Duration Filter -->
+                    <div class="border-b pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Duration (In Nights)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2 space-y-2">
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">1-3 Nights</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">4-6 Nights</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">7-9 Nights</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">10+ Nights</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Flights Filter -->
+                    <div class="border-b pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Flights
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2 space-y-2">
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Include Flights</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Budget Filter -->
+                    <div class="border-b pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Budget (per person)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2">
+                            <div class="flex justify-between text-xs text-gray-500 mb-2">
+                                <span>₹0</span>
+                                <span>₹50,000+</span>
+                            </div>
+                            <input type="range" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer" min="0" max="50000" value="25000">
+                        </div>
+                    </div>
+
+                    <!-- Hotel Category Filter -->
+                    <div class="border-b pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Hotel Category
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2 space-y-2">
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="radio" name="hotel-category" class="rounded-full text-blue-600">
+                                <span class="ml-2">5 Star</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="radio" name="hotel-category" class="rounded-full text-blue-600">
+                                <span class="ml-2">4 Star</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="radio" name="hotel-category" class="rounded-full text-blue-600">
+                                <span class="ml-2">3 Star</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="radio" name="hotel-category" class="rounded-full text-blue-600">
+                                <span class="ml-2">Budget</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Travel Type Filter (New) -->
+                    <div class="border-b pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Travel Type
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2 space-y-2">
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Family</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Honeymoon</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Solo</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Activities Filter (New) -->
+                    <div class="pb-2">
+                        <button class="flex justify-between items-center text-base font-semibold text-gray-600 w-full filter-toggle">
+                            Activities
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div class="filter-content mt-2 space-y-2">
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Trekking</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Sightseeing</span>
+                            </label>
+                            <label class="flex items-center text-sm text-gray-700">
+                                <input type="checkbox" class="rounded text-blue-600">
+                                <span class="ml-2">Adventure Sports</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content - Packages -->
+        <section class="lg:w-3/4">
+            
+            <!-- Category Tabs -->
+            <div class="bg-white rounded-lg shadow-lg mb-6 p-2 flex items-center overflow-x-auto space-x-2 sm:space-x-4">
+                <a href="#" class="flex-shrink-0 text-sm md:text-base font-bold text-black-600 border-b-2 border-blue-600 pb-1 px-2">
+                    Monasteries In Sikkim
+                </a>
+    
+            </div>
+
+            <!-- Sort By Section -->
+            <div class="flex justify-end items-center mb-6">
+                <div class="flex items-center space-x-2 text-gray-600">
+                    <span class="text-sm font-medium">Sorted By:</span>
+                    <select class="rounded-md border border-gray-300 p-1 text-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option>Popular</option>
+                        <option>Price (Low to High)</option>
+                        <option>Price (High to Low)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Package Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+                <!-- First Card -->
+                <a href="Rumtek-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="rumtek.jpg" alt="Sikkim Package 1" class="w-full h-48 object-cover">
+                        
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Rumtek Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">Most famous and biggest monastery in Sikkim.</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: Near Gangtok (23 km)</span>
+
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Second Card -->
+                <a href="Pemayangtse-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="Pemayangtse Monastery.png" alt="Sikkim Package 2" class="w-full h-48 object-cover">
+            
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Pemayangtse Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">One of the oldest monasteries (built in 1705).
+</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: Pelling, West Sikkim
+</span>
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Third Card (New) -->
+                <a href="Tashiding-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="Tashiding.webp" alt="Sikkim Package 3" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Tashiding Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">Built in 1717, very sacred monastery.
+</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: West Sikkim (near Yuksom)
+</span>
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Fourth Card (New) -->
+                <a href="Lingdum-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="lingdum-monastery.jpg" alt="Sikkim Package 4" class="w-full h-48 object-cover">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full">Family Special</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Lingdum Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">New but very scenic monastery, known for its grand architecture.</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: 20 km from Gangtok</span>
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Fifth Card (New) -->
+                <a href="Ralang-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="Ralang-Monastery.jpg" alt="Sikkim Package 5" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Ralang Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">Built after the return of the 4th Chogyal from his Tibet pilgrimage</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: Ravangla, South Sikkim</span>
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Sixth Card (New) -->
+                <a href="phensang-monastery.html" class="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="Phensang.jpg" alt="Sikkim Package 6" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800">Phensang Monastery</h3>
+                        <p class="text-sm text-gray-500 mb-2">One of the largest monasteries of Nyingmapa order.
+</p>
+                        <div class="flex items-center justify-between text-gray-700">
+                            <span class="text-xl font-bold">Location: North Sikkim
+</span>
+                            <button class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Details</button>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Message Box -->
+    <div id="message-box" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p id="message-text" class="text-gray-800 font-semibold mb-4"></p>
+            <button id="message-close-btn" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">Close</button>
+        </div>
+    </div>
+    
+    <!-- Login/Sign Up Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-1/3 relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 id="modal-title" class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+            <form id="auth-form" class="space-y-4">
+                <div class="space-y-2">
+                    <label for="email" class="text-sm font-semibold text-gray-600">Email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="yourname@example.com" required>
+                </div>
+                <div class="space-y-2">
+                    <label for="password" class="text-sm font-semibold text-gray-600">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="••••••••" required>
+                </div>
+                <button type="submit" id="auth-submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors">Login</button>
+                <p id="auth-error-message" class="text-red-500 text-sm text-center"></p>
+            </form>
+            <div class="text-center mt-4 text-sm">
+                <span id="auth-toggle-text">Don't have an account?</span>
+                <button id="auth-toggle-btn" class="text-blue-600 hover:underline">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat and Callback Widgets -->
+    <div class="fixed bottom-6 right-6 flex flex-col items-end space-y-4">
+        <div id="live-chat" class="bg-white rounded-full shadow-lg p-3 cursor-pointer hover:scale-105 transition-transform">
+            <img src="https://img.icons8.com/material-rounded/24/000000/speech-bubble--v1.png" alt="Live Chat icon">
+            <span class="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded-full">3</span>
+        </div>
+        <div id="get-callback" class="bg-white rounded-full shadow-lg p-3 cursor-pointer hover:scale-105 transition-transform">
+            <img src="https://img.icons8.com/material-rounded/24/000000/phone.png" alt="Get a callback icon">
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-12 mt-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- About Us -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">About Us</h3>
+                <p class="text-sm text-gray-400">
+                    MakeMyTrip is a leading online travel company in India. We provide a one-stop-shop for all your travel needs, including flights, hotels, holiday packages, and more. Our mission is to make travel a delightful and hassle-free experience for everyone.
+                </p>
+            </div>
+            <!-- Contact Us -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <ul class="text-sm text-gray-400 space-y-2">
+                    <li>Address: 123 Travel Lane, Tour City, TCI 12345</li>
+                    <li>Phone: +91 9876543210</li>
+                    <li>Email: support@makemytrip.com</li>
+                </ul>
+            </div>
+            <!-- Social Media -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:scale-110 transition-transform">
+                        <img src="https://img.icons8.com/color/48/000000/facebook.png" alt="Facebook icon" class="h-8 w-8">
+                    </a>
+                    <a href="#" class="hover:scale-110 transition-transform">
+                        <img src="https://img.icons8.com/color/48/000000/twitter.png" alt="Twitter icon" class="h-8 w-8">
+                    </a>
+                    <a href="#" class="hover:scale-110 transition-transform">
+                        <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram icon" class="h-8 w-8">
+                    </a>
+                    <a href="#" class="hover:scale-110 transition-transform">
+                        <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn icon" class="h-8 w-8">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 text-center text-sm text-gray-500">
+            &copy; 2024 MakeMyTrip. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signInWithCustomToken, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, doc, getDocs, setDoc, query, where, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const messageBox = document.getElementById('message-box');
+            const messageText = document.getElementById('message-text');
+            const closeBtn = document.getElementById('message-close-btn');
+
+            function showMessage(message) {
+                messageText.textContent = message;
+                messageBox.classList.remove('hidden');
+                messageBox.classList.add('flex');
+            }
+
+            closeBtn.addEventListener('click', () => {
+                messageBox.classList.remove('flex');
+                messageBox.classList.add('hidden');
+            });
+
+            // Handle filter toggle functionality
+            document.querySelectorAll('.filter-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterContent = button.nextElementSibling;
+                    const arrow = button.querySelector('svg');
+
+                    if (filterContent.style.display === 'none' || filterContent.style.display === '') {
+                        filterContent.style.display = 'block';
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        filterContent.style.display = 'none';
+                        arrow.style.transform = 'rotate(-180deg)';
+                    }
+                });
+            });
+
+            // Handle search button functionality
+            document.getElementById('search-btn').addEventListener('click', () => {
+                const startingFrom = document.getElementById('starting-from').value;
+                const goingTo = document.getElementById('going-to').value;
+                const startingDate = document.getElementById('starting-date').value;
+                
+                const message = `Searching for packages from ${startingFrom} to ${goingTo} on ${startingDate}. Please wait...`;
+                showMessage(message);
+            });
+
+            // Handle chat and callback button functionality
+            document.getElementById('live-chat').addEventListener('click', () => {
+                showMessage('Opening live chat...');
+            });
+            
+            document.getElementById('get-callback').addEventListener('click', () => {
+                showMessage('A representative will call you back shortly.');
+            });
+
+            // Handle details button click functionality
+            document.querySelectorAll('.bg-blue-600.text-white.text-sm').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevents the link from navigating
+                    const cardTitle = event.target.closest('a').querySelector('h3').textContent;
+                    showMessage(`You clicked "Details" for: ${cardTitle}`);
+                });
+            });
+
+            // Handle date input click to show calendar
+            const startingDateInput = document.getElementById('starting-date');
+            startingDateInput.addEventListener('click', () => {
+                if ('showPicker' in startingDateInput) {
+                    startingDateInput.showPicker();
+                }
+            });
+
+            // --- Authentication Logic ---
+
+            // Firebase Initialization
+            let db;
+            let auth;
+            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            let userId;
+
+            // Check if Firebase is already initialized
+            if (Object.keys(firebaseConfig).length > 0) {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+            } else {
+                console.error("Firebase config is missing.");
+            }
+
+            // UI Elements
+            const loginBtnHeader = document.getElementById('login-btn-header');
+            const loginModal = document.getElementById('login-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modalTitle = document.getElementById('modal-title');
+            const authForm = document.getElementById('auth-form');
+            const authSubmitBtn = document.getElementById('auth-submit-btn');
+            const authToggleBtn = document.getElementById('auth-toggle-btn');
+            const authToggleText = document.getElementById('auth-toggle-text');
+            const authErrorMessage = document.getElementById('auth-error-message');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            let isLoginMode = true;
+
+            // Show/hide modal
+            loginBtnHeader.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.remove('hidden');
+                loginModal.classList.add('flex');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                loginModal.classList.remove('flex');
+                loginModal.classList.add('hidden');
+            });
+
+            // Toggle between login and sign up modes
+            authToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                isLoginMode = !isLoginMode;
+                if (isLoginMode) {
+                    modalTitle.textContent = 'Login';
+                    authSubmitBtn.textContent = 'Login';
+                    authToggleText.textContent = "Don't have an account?";
+                    authToggleBtn.textContent = 'Create Account';
+                } else {
+                    modalTitle.textContent = 'Create Account';
+                    authSubmitBtn.textContent = 'Create Account';
+                    authToggleText.textContent = "Already have an account?";
+                    authToggleBtn.textContent = 'Login';
+                }
+                authErrorMessage.textContent = '';
+            });
+
+            // Handle form submission
+            authForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authErrorMessage.textContent = '';
+                const email = emailInput.value;
+                const password = passwordInput.value;
+
+                if (isLoginMode) {
+                    // Login
+                    try {
+                        await signInWithEmailAndPassword(auth, email, password);
+                        loginModal.classList.remove('flex');
+                        loginModal.classList.add('hidden');
+                        showMessage('Login successful!');
+                    } catch (error) {
+                        authErrorMessage.textContent = error.message;
+                    }
+                } else {
+                    // Create Account
+                    try {
+                        await createUserWithEmailAndPassword(auth, email, password);
+                        loginModal.classList.remove('flex');
+                        loginModal.classList.add('hidden');
+                        showMessage('Account created successfully!');
+                    } catch (error) {
+                        authErrorMessage.textContent = error.message;
+                    }
+                }
+            });
+
+            // Auth state change listener
+            onAuthStateChanged(auth, async (user) => {
+                const authUiContainer = document.getElementById('auth-ui');
+                if (user) {
+                    userId = user.uid;
+                    // User is signed in
+                    authUiContainer.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                            <span class="text-base font-medium">Hello, ${user.email}</span>
+                            <button id="logout-btn" class="bg-white text-blue-600 font-bold px-4 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                                Logout
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('logout-btn').addEventListener('click', async () => {
+                        await signOut(auth);
+                        showMessage('Logged out successfully!');
+                    });
+                } else {
+                    // User is signed out
+                    authUiContainer.innerHTML = `
+                        <a id="login-btn-header" href="#" class="flex items-center text-base font-medium">
+                            <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" class="h-6 w-6 mr-1" alt="User icon">
+                            <span>Login or Create Account</span>
+                        </a>
+                    `;
+                    document.getElementById('login-btn-header').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        loginModal.classList.remove('hidden');
+                        loginModal.classList.add('flex');
+                    });
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
