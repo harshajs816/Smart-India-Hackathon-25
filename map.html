@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Buddhist Monasteries of Sikkim - Interactive Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* Base and layout styles */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary-color: #8B4513; --primary-light: #A0522D; --secondary-color: #2196F3;
+    --success-color: #4CAF50; --warning-color: #FF9800; --error-color: #F44336;
+    --east-color: #2196F3; --north-color: #4CAF50; --west-color: #F44336; --south-color: #FF9800;
+    --white: #ffffff; --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #eeeeee;
+    --gray-300: #e0e0e0; --gray-600: #757575; --gray-800: #424242;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --sidebar-width: 380px; --header-height: 70px;
+  }
+  body { font-family: var(--font-family); background-color: var(--gray-100); color: var(--gray-800); line-height: 1.6; height: 100vh; overflow: hidden; }
+  .app-container { display: flex; flex-direction: column; height: 100vh; }
+  .app-header { height: var(--header-height); background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); color: var(--white); display: flex; align-items: center; padding: 0 1.5rem; font-weight: 700; font-size: 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .app-body { flex: 1; display: flex; height: calc(100vh - var(--header-height)); }
+
+  /* Sidebar styles */
+  aside.sidebar { width: var(--sidebar-width); background: var(--white); border-right: 1px solid var(--gray-200); display: flex; flex-direction: column; overflow: hidden; }
+  .sidebar-content { padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; flex: 1; }
+
+  /* Home section */
+  section.sidebar-section { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-200); }
+  .section-header { padding: 1rem; border-bottom: 1px solid var(--gray-200); }
+  .section-title { display: flex; align-items: center; gap: 0.5rem; font-size: 1.125rem; font-weight: 600; }
+  .section-icon { font-size: 1.25rem; }
+  .home-input-group { padding: 1rem; }
+  .city-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+  button.city-btn {
+    padding: 10px 8px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.3s ease;
+  }
+  button.city-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+  button.city-btn[style*="F44336"] {background:#F44336;} /* West Color for some city buttons */
+  button.city-btn[style*="FF9800"] {background:#FF9800;}
+  button.city-btn[style*="4CAF50"] {background:#4CAF50;}
+  .map-click-btn {
+    width: 100%; padding: 12px; background: var(--success-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; margin-bottom: 15px;
+  }
+  .map-click-btn:hover { background: #388E3C; transform: translateY(-1px); }
+  .coordinates-section { margin-bottom: 15px; }
+  .coordinates-inputs { display: flex; gap: 5px; margin-bottom: 8px; }
+  .coord-input {
+    flex: 1; padding: 8px; border: 1px solid var(--gray-300); border-radius: 4px; font-size: 14px;
+  }
+  .coord-input:focus { outline: none; border-color: var(--secondary-color); }
+  .set-coord-btn {
+    padding: 8px 12px; background: var(--warning-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;
+  }
+  .set-coord-btn:hover { background: #F57C00; }
+  .status-message {
+    padding: 10px; border-radius: 6px; font-size: 14px; margin-top: 10px;
+  }
+  .status-message.success { background: rgba(76,175,80,0.1); color: var(--success-color); border: 1px solid rgba(76,175,80,0.3); }
+  .status-message.error { background: rgba(244,67,54,0.1); color: var(--error-color); border: 1px solid rgba(244,67,54,0.3); }
+  .status-message.warning { background: rgba(255,152,0,0.1); color: var(--warning-color); border: 1px solid rgba(255,152,0,0.3); }
+  .status-message.info { background: rgba(33,150,243,0.1); color: var(--secondary-color); border: 1px solid rgba(33,150,243,0.3); }
+
+  /* Monastery list */
+  .monasteries-list { flex: 1; overflow-y: auto; padding: 0.5rem; min-height: 0; }
+  .monastery-item {
+    padding: 1rem; margin-bottom: 0.5rem; background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+    position: relative;
+  }
+  .monastery-item:hover { background: var(--gray-50); border-color: var(--secondary-color); transform: translateX(2px); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+  .monastery-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; line-height: 1.4; }
+  .monastery-details { font-size: 0.875rem; color: var(--gray-600); line-height: 1.3; }
+
+  /* Map styles */
+  .map-area { flex: 1; position: relative; background: var(--gray-100); }
+  #map { width: 100%; height: 100%; }
+  .map-legend {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--white); padding: 1rem; border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1); border: 1px solid var(--gray-200); z-index: 1000;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--gray-800); margin-bottom: 0.4rem; }
+  .legend-marker {
+    width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--white);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    display: inline-block;
+  }
+  .legend-marker.east { background: var(--east-color); }
+  .legend-marker.north { background: var(--north-color); }
+  .legend-marker.west { background: var(--west-color); }
+  .legend-marker.south { background: var(--south-color); }
+  .legend-marker.home { background: #9C27B0; }
+
+  /* Animated home marker */
+  .home-marker-emoji {
+    background: none !important; border: none !important;
+    font-size: 24px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+</style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-content">
+        <h1 class="app-title"><span class="title-icon">🏛️</span> Buddhist Monasteries of Sikkim</h1>
+        <div class="header-stats">
+          <div class="stat-pill">
+          
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+
+          <!-- Home Location Input -->
+          <section class="sidebar-section">
+            <div class="section-header">
+              <h3 class="section-title"><span class="section-icon">🏠</span> Set Your Home Location</h3>
+            </div>
+            <div class="home-input-group">
+              <input id="home-address" type="text" placeholder="Enter any address or city" class="address-input" />
+              <button class="set-coord-btn" onclick="setHomeFromAddress()">Set Home</button>
+              <button class="map-click-btn" onclick="enableClickToSet()">🖱️ Click Map to Set Home</button>
+              <div id="home-status" class="status-message" style="display:none;"></div>
+
+              <div class="coordinates-section" style="margin-top:1rem;">
+                <p style="font-weight:600;color:#333;">📍 Or Enter Coordinates:</p>
+                <div class="coordinates-inputs">
+                  <input id="manual-lat" type="number" placeholder="Latitude" step="0.000001" class="coord-input"/>
+                  <input id="manual-lng" type="number" placeholder="Longitude" step="0.000001" class="coord-input"/>
+                  <button class="set-coord-btn" onclick="setManualLocation()">Set</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Districts Overview -->
+          <section class="sidebar-section">
+            <div class="section-header">
+              <h3 class="section-title"><span class="section-icon">📊</span> District Overview</h3>
+            </div>
+            <div class="districts-grid">
+              <div class="district-card east"><span class="district-marker east"></span> <span>East Sikkim (12)</span></div>
+              <div class="district-card north"><span class="district-marker north"></span> <span>North Sikkim (7)</span></div>
+              <div class="district-card west"><span class="district-marker west"></span> <span>West Sikkim (6)</span></div>
+              <div class="district-card south"><span class="district-marker south"></span> <span>South Sikkim (7)</span></div>
+            </div>
+          </section>
+
+          <!-- Map Controls -->
+          <section class="sidebar-section">
+            <div class="section-header">
+              <h3 class="section-title"><span class="section-icon">🎛️</span> Map Controls</h3>
+            </div>
+            <div class="controls-group">
+              <button id="clear-lines" class="control-btn">🧹 Clear All Lines</button>
+              <div class="help-text">
+                <p>💡 How to use:</p>
+                <ul>
+                  <li>Enter your home city/address or click map</li>
+                  <li>Click any monastery to see distance & route</li>
+                  <li>Use manual coordinates or map click as needed</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Monasteries List -->
+          <section class="sidebar-section monasteries-section">
+            <div class="section-header">
+              <h3 class="section-title"><span class="section-icon">🏛️</span> All Monasteries</h3>
+              <div class="search-wrapper">
+                <input id="monastery-search" class="search-input" placeholder="Search monasteries..." type="text" />
+              </div>
+            </div>
+            <div id="monastery-list" class="monasteries-list"></div>
+          </section>
+
+        </div>
+      </aside>
+
+      <main class="map-area">
+        <div id="map"></div>
+        <div class="map-legend">
+          <h4>Legend</h4>
+          <div class="legend-item"><span class="legend-marker east"></span> East Sikkim</div>
+          <div class="legend-item"><span class="legend-marker north"></span> North Sikkim</div>
+          <div class="legend-item"><span class="legend-marker west"></span> West Sikkim</div>
+          <div class="legend-item"><span class="legend-marker south"></span> South Sikkim</div>
+          <div class="legend-item"><span class="legend-marker home"></span> Your Home Location</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Global variables
+  let map, homeMarker, homeLocation = null;
+  let monasteryMarkers = [];
+  let activePolylines = [];
+  let isClickModeActive = false;
+
+  // Monasteries data (all 32 with details)
+  const monasteries = [
+    {name:"Rumtek Monastery (Dharma Chakra Centre)",district:"East Sikkim",lat:27.32889,lng:88.56139,established:"1962",sect:"Karma Kagyu",description:"Largest monastery in Sikkim and seat in exile of the Gyalwang Karmapa. Famous for its golden stupa and traditional Tibetan architecture."},
+    {name:"Enchey Monastery",district:"East Sikkim",lat:27.335863,lng:88.619194,established:"1840",sect:"Nyingma",description:"The Solitary Temple located 3 km from Gangtok centre. Built by Lama Druptob Karpo and known for its Cham dances."},
+    {name:"Old Rumtek Monastery",district:"East Sikkim",lat:27.3275,lng:88.56,established:"1734",sect:"Karma Kagyu",description:"Original monastery built by 9th Karmapa Wangchuk Dorje. Historic site that preceded the current Rumtek complex."},
+    {name:"Kathog Dorjeden Monastery",district:"East Sikkim",lat:27.325,lng:88.585,established:"1840",sect:"Nyingma",description:"Located above Pakyong Bazar. Known for its peaceful setting and traditional Nyingma practices."},
+    {name:"Lingdum Zurmang Monastery",district:"East Sikkim",lat:27.31,lng:88.6,established:"1999",sect:"Kagyu",description:"Modern monastery with beautiful architecture. Part of the Zurmang tradition and popular pilgrimage site."},
+    {name:"Rinak Monastery",district:"East Sikkim",lat:27.3,lng:88.62,established:"1841",sect:"Kagyu",description:"Founded by Saint Konchog Gyaltshen. Known for its annual masked dances and spiritual retreats."},
+    {name:"Bermoik Monastery",district:"East Sikkim",lat:27.25,lng:88.5,established:"1873",sect:"Karma Kagyu",description:"Built by combined effort of Lamas and Laymen. Features traditional architecture and peaceful meditation halls."},
+    {name:"Martam Namdzong",district:"East Sikkim",lat:27.28,lng:88.55,established:"1917",sect:"Buddhist",description:"Historic monastery in Martam area. Known for its scenic location and traditional Buddhist practices."},
+    {name:"Singtam Monastery",district:"East Sikkim",lat:27.23467,lng:88.50168,established:"1992",sect:"Buddhist",description:"Modern monastery in Singtam town. Popular among local devotees and visitors to the area."},
+    {name:"Simig Monastery",district:"East Sikkim",lat:27.315,lng:88.61,established:"1843",sect:"Buddhist",description:"Historic monastery in East Sikkim. Known for its traditional ceremonies and peaceful atmosphere."},
+    {name:"Pandam Monastery",district:"East Sikkim",lat:27.29,lng:88.58,established:"1955",sect:"Buddhist",description:"Mid-20th century monastery. Features modern amenities while maintaining traditional Buddhist practices."},
+    {name:"Rhenock Monastery",district:"East Sikkim",lat:27.32,lng:88.64,established:"Historic",sect:"Buddhist",description:"Monastery in Rhenock area. Part of the traditional Buddhist circuit in East Sikkim."},
+    {name:"Phodong Monastery",district:"North Sikkim",lat:27.41278,lng:88.58389,established:"1734",sect:"Karma Kagyu",description:"Home to 260 monks, rebuilt after earthquake. One of the most important monasteries in North Sikkim with beautiful murals."},
+    {name:"Labrang Monastery",district:"North Sikkim",lat:27.418881,lng:88.585,established:"1844",sect:"Nyingma",description:"Built to perpetuate Nyingmapa School of Buddhism. Known for its extensive library and meditation retreats."},
+    {name:"Phensang Monastery",district:"North Sikkim",lat:27.42,lng:88.57,established:"1721",sect:"Nyingma",description:"One of six biggest gompas in Sikkim, houses most monks. Famous for its annual festivals and religious ceremonies."},
+    {name:"Lachen Monastery",district:"North Sikkim",lat:27.72,lng:88.54,established:"1858",sect:"Nyingma",description:"Also known as Ngodub Choling or Launching Gompa. Located in the scenic Lachen valley near the Tibetan border."},
+    {name:"Lachung Monastery",district:"North Sikkim",lat:27.7,lng:88.74,established:"1880",sect:"Nyingma",description:"Located in apple orchards at confluence of rivers. Famous for its beautiful setting among snow-capped peaks."},
+    {name:"Kabi Monastery",district:"North Sikkim",lat:27.45,lng:88.56,established:"1911",sect:"Buddhist",description:"Historic monastery on North Sikkim highway. Important site for the historic blood brotherhood treaty signing."},
+    {name:"Hee Gyathang Monastery",district:"North Sikkim",lat:27.6,lng:88.65,established:"1914",sect:"Buddhist",description:"Remote monastery in high altitude location. Known for its pristine natural surroundings and meditation retreats."},
+    {name:"Pemayangtse Monastery",district:"West Sikkim",lat:27.30444,lng:88.25278,established:"1705",sect:"Nyingma",description:"Perfect Sublime Lotus, one of most important monasteries. Founded by Lama Lhatsun Chempo and features a seven-tiered wooden sculpture."},
+    {name:"Dubdi Monastery",district:"West Sikkim",lat:27.29,lng:88.21,established:"1647",sect:"Nyingma",description:"Oldest monastery in Sikkim, The Hermit's Cell. Built by Lhatsun Chempo and considered the first monastery in Sikkim."},
+    {name:"Sanga Choeling Monastery",district:"West Sikkim",lat:27.26389,lng:88.22139,established:"1697",sect:"Nyingma",description:"Island of Guhyamantra teachings, ridge-top location. Second oldest monastery with stunning views of the Himalayas."},
+    {name:"Tashiding Monastery",district:"West Sikkim",lat:27.30833,lng:88.29806,established:"1651",sect:"Nyingma",description:"Most sacred monastery in Sikkim, Heart of Sikkim. Built on a heart-shaped hill and considered the holiest site in Sikkim."},
+    {name:"Rinchenpong Monastery",district:"West Sikkim",lat:27.28,lng:88.24,established:"1772",sect:"Buddhist",description:"Third oldest monastery with rare Ati Buddha statue. Located on a hilltop with panoramic views of the surrounding valleys."},
+    {name:"Khecheopalri Sacred Lake Monastery",district:"West Sikkim",lat:27.33,lng:88.2,established:"Historic",sect:"Buddhist",description:"Sacred lake blessed by Guru Padmasambhava. The wish-fulfilling lake is considered sacred by both Buddhists and Hindus."},
+    {name:"Ralong Monastery (New)",district:"South Sikkim",lat:27.32,lng:88.39,established:"1768",sect:"Kagyu",description:"Beautiful architecture near Ravangla. Modern monastery complex with traditional Tibetan design elements and peaceful gardens."},
+    {name:"Ralong Monastery (Old)",district:"South Sikkim",lat:27.3,lng:88.37,established:"1768",sect:"Kagyu",description:"Original monastery with spiritual dignity. Historic site that maintains traditional practices and ancient Buddhist texts."},
+    {name:"Doling Monastery",district:"South Sikkim",lat:27.31,lng:88.38,established:"18th century",sect:"Nyingma",description:"Also known as Doling Gompa, hilltop monastery. Offers spectacular views of the Kanchenjunga range and surrounding valleys."},
+    {name:"Samdruptse Monastery",district:"South Sikkim",lat:27.16494,lng:88.3638,established:"2004",sect:"Buddhist",description:"Home to 138 ft tall Guru Padmasambhava statue. Modern pilgrimage site featuring the world's largest statue of Guru Rinpoche."},
+    {name:"Bon Monastery (Kewzing)",district:"South Sikkim",lat:27.33,lng:88.4,established:"Modern",sect:"Bon",description:"Bon Yung Dung Monastery offering valley views. Represents the ancient Bon tradition that predates Buddhism in the region."},
+    {name:"Tumlong Monastery",district:"South Sikkim",lat:27.35,lng:88.42,established:"Historic",sect:"Buddhist",description:"Historic monastery in Temi Tea Estate area. Located near Sikkim's only tea garden with beautiful natural surroundings."},
+    {name:"Maenam Gompa",district:"South Sikkim",lat:27.33,lng:88.41,established:"Historic",sect:"Buddhist",description:"On trek route to Maenam Wildlife Sanctuary. Popular hiking destination with rich biodiversity and mountain views."}
+  ];
+
+  const districtColors = {
+    'East Sikkim': '#2196F3',
+    'North Sikkim': '#4CAF50',
+    'West Sikkim': '#F44336',
+    'South Sikkim': '#FF9800'
+  };
+
+  function initializeMap(){
+    map = L.map('map').setView([27.533,88.512],9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution: '© OpenStreetMap contributors',
+      maxZoom:18
+    }).addTo(map);
+
+    addMonasteries();
+    populateMonasteryList();
+    setupListeners();
+
+    setTimeout(() => showHomeCityStatus('Enter your home city/address or click map to begin.', 'info'), 1000);
+  }
+
+  function addMonasteries(){
+    monasteries.forEach( (monastery,index)=>{
+      const marker = L.circleMarker([monastery.lat,monastery.lng],{
+        color:'#fff',
+        fillColor: districtColors[monastery.district],
+        fillOpacity:0.9,
+        radius:8,
+        weight:2
+      }).addTo(map);
+
+      const popupContent = createMonasteryPopup(monastery,index);
+
+      marker.bindPopup(popupContent,{className:'custom-popup', maxWidth:350});
+      marker.on('click', ()=>showMonasteryInfo(monastery,index));
+      monasteryMarkers.push({marker,data:monastery});
+    });
+  }
+
+  function createMonasteryPopup(monastery,index){
+    let distanceInfo='';
+    if(homeLocation){
+      const dist = calculateDistance(homeLocation.lat,homeLocation.lng,monastery.lat,monastery.lng);
+      distanceInfo = `<div style="background: rgba(33,150,243,0.1); border:1px solid #2196F3; border-radius:6px; padding:8px; margin:8px 0;"><strong style="color:#1976d2;">📏 Distance from your city: ${dist.toFixed(2)} km</strong></div>`;
+    }
+    return `
+      <div style="font-family: 'Inter', sans-serif; line-height:1.4;">
+        <div style="font-weight:700; color:#8B4513; font-size:1.1rem; margin-bottom:8px;">${monastery.name}</div>
+        <div style="margin:4px 0; font-size:0.9rem;"><strong>District:</strong> ${monastery.district}</div>
+        <div style="margin:4px 0; font-size:0.9rem;"><strong>Established:</strong> ${monastery.established}</div>
+        <div style="margin:4px 0; font-size:0.9rem;"><strong>Sect:</strong> ${monastery.sect}</div>
+        <div style="margin:4px 0; font-size:0.9rem;"><strong>Coordinates:</strong> ${monastery.lat.toFixed(6)}, ${monastery.lng.toFixed(6)}</div>
+        ${distanceInfo}
+        <div style="margin-top:8px; font-style: italic; color:#666; font-size:0.85rem;">${monastery.description}</div>
+      </div>
+    `;
+  }
+
+  function showMonasteryInfo(monastery,index){
+    if(homeLocation){
+      drawRoute(monastery);
+    }
+  }
+
+  function drawRoute(monastery){
+    if(!homeLocation) return;
+    if(window.currentLine) map.removeLayer(window.currentLine);
+    window.currentLine = L.polyline([
+      [homeLocation.lat, homeLocation.lng],
+      [monastery.lat, monastery.lng]
+    ], {color:'red', weight:3, dashArray:'10,6'}).addTo(map);
+  }
+
+  function populateMonasteryList(monasteriesToShow = monasteries){
+    const container = document.getElementById('monastery-list');
+    container.innerHTML = '';
+    monasteriesToShow.forEach((m, idx) => {
+      const div = document.createElement('div');
+      div.className = 'monastery-item';
+      div.tabIndex = 0;
+      div.innerHTML = `<div class="monastery-name">${m.name}</div><div class="monastery-details">${m.district} • ${m.established} • ${m.sect}</div>`;
+      div.onclick = () => {
+        map.setView([m.lat, m.lng],14);
+        monasteryMarkers.find(x=>x.data.name===m.name).marker.fire('click');
+      };
+      div.onkeypress = e => {if(e.key==='Enter')div.click()};
+      container.appendChild(div);
+    });
+  }
+
+  function setupListeners(){
+    document.getElementById('monastery-search').addEventListener('input', e => {
+      const text = e.target.value.toLowerCase().trim();
+      if(!text) {
+        populateMonasteryList();
+        return;
+      }
+      const filtered = monasteries.filter(m => 
+        m.name.toLowerCase().includes(text) ||
+        m.district.toLowerCase().includes(text) ||
+        m.sect.toLowerCase().includes(text) ||
+        m.description.toLowerCase().includes(text)
+      );
+      populateMonasteryList(filtered);
+    });
+    document.getElementById('clear-lines').addEventListener('click', () => {
+      if(window.currentLine){
+        map.removeLayer(window.currentLine);
+        window.currentLine = null;
+      }
+      showHomeCityStatus('🧹 All route lines cleared', 'info');
+    });
+  }
+
+  // Free-text geocoding with Nominatim
+  async function setHomeFromAddress(){
+    const addrInput = document.getElementById('home-address');
+    const status = document.getElementById('home-status');
+    const address = addrInput.value.trim();
+    if(!address){
+      status.textContent = 'Please enter an address or city.';
+      status.className = 'status-message error';
+      return;
+    }
+    status.textContent = 'Searching location...';
+    status.className = 'status-message info';
+    try {
+      const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`);
+      const data = await resp.json();
+      if(data.length === 0){
+        status.textContent = 'Address not found. Please try a different search.';
+        status.className = 'status-message error';
+        return;
+      }
+      const loc = data[0];
+      setHomeLocation(parseFloat(loc.lat), parseFloat(loc.lon), loc.display_name);
+      status.textContent = 'Home location set!';
+      status.className = 'status-message success';
+      addrInput.value = '';
+    } catch(e) {
+      status.textContent = 'Error finding location. Please try again later.';
+      status.className = 'status-message error';
+      console.error(e);
+    }
+  }
+
+  function setHomeLocation(lat, lng, desc) {
+    homeLocation = { lat, lng};
+
+    if(homeMarker){map.removeLayer(homeMarker);}
+    homeMarker = L.marker([lat,lng],{
+      icon: L.divIcon({
+        html: '🏠',
+        className: 'home-marker-emoji',
+        iconSize: [30,30],
+        iconAnchor: [15,30]
+      }),
+      draggable:true
+    }).addTo(map);
+    homeMarker.bindPopup(`<b>Your Home</b><br>${desc}`).openPopup();
+    map.setView([lat,lng], 10);
+
+    homeMarker.on('dragend', e => {
+      let latlng = e.target.getLatLng();
+      homeLocation = { lat: latlng.lat, lng: latlng.lng };
+    });
+  }
+
+  function enableClickToSet(){
+    if(isClickModeActive) return;
+    isClickModeActive = true;
+    const status = document.getElementById('home-status');
+    status.textContent = 'Click on the map to set your home location.';
+    status.className = 'status-message info';
+    map.getContainer().style.cursor = 'crosshair';
+    function onMapClick(e){
+      setHomeLocation(e.latlng.lat, e.latlng.lng, 'Custom Location');
+      isClickModeActive = false;
+      status.textContent = 'Home location set.';
+      status.className = 'status-message success';
+      map.getContainer().style.cursor = '';
+      map.off('click', onMapClick);
+    }
+    map.once('click', onMapClick);
+  }
+
+  function setManualLocation(){
+    const latInput = document.getElementById('manual-lat');
+    const lngInput = document.getElementById('manual-lng');
+    const status = document.getElementById('home-status');
+    let lat = parseFloat(latInput.value);
+    let lng = parseFloat(lngInput.value);
+    if(isNaN(lat) || isNaN(lng)){
+      status.textContent = 'Please enter valid numbers for latitude and longitude.';
+      status.className = 'status-message error';
+      return;
+    }
+    setHomeLocation(lat, lng, 'Manual Location');
+    status.textContent = 'Home location set manually.';
+    status.className = 'status-message success';
+    latInput.value = ''; lngInput.value = '';
+  }
+
+  // Distance calculation (Haversine formula)
+  function calculateDistance(lat1,lng1,lat2,lng2){
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI/180;
+    const dLng = (lng2 - lng1) * Math.PI/180;
+    const a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R*c;
+  }
+
+  // Status message helper
+  function showHomeCityStatus(msg,type){
+    const status = document.getElementById('home-status');
+    status.textContent = msg;
+    status.className = 'status-message '+type;
+    status.style.display = 'block';
+    if(type==='success' || type==='info'){
+      setTimeout(()=>{status.style.display='none';},8000);
+    }
+  }
+
+  // Initialization
+  document.addEventListener('DOMContentLoaded', initializeMap);
+</script>
+</body>
+</html>

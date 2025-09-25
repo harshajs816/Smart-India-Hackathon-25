@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sikkim Hotels - Book Your Mountain Retreat</title>
+    <link rel="stylesheet" href="style-ui.css">
+   
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="logo">
+                    <h1>Sikkim Hotels</h1>
+                    <p>Mountain Paradise Awaits</p>
+                </div>
+                <nav class="nav">
+                    <button class="btn btn--outline" id="loginBtn">Sign In</button>
+                    <button class="btn btn--primary" id="registerBtn">Register</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__background"></div>
+        <div class="hero__overlay"></div>
+        <div class="container">
+            <div class="hero__content">
+                <h1>Discover Sikkim's Finest Hotels</h1>
+                <p>From Himalayan views to cultural heritage - find your perfect mountain retreat</p>
+                
+                <!-- Search Form -->
+                <div class="search-form card">
+                    <div class="search-form__grid">
+                        <div class="form-group">
+                            <label class="form-label">Destination</label>
+                            <select class="form-control" id="destination">
+                                <option>Gangtok</option>
+                                <option>Pelling</option>
+                                <option>Lachung</option>
+                                <option>North Sikkim</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Check-in</label>
+                            <input type="date" class="form-control" id="checkin">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" class="form-control" id="checkout">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Guests</label>
+                            <select class="form-control" id="guests">
+                                <option>1 Guest</option>
+                                <option>2 Guests</option>
+                                <option>3 Guests</option>
+                                <option>4+ Guests</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--full-width" id="searchBtn">Search Hotels</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2>Popular Hotel Categories in Sikkim</h2>
+            <div class="categories__grid" id="categoriesGrid">
+                <!-- Categories will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Attractions -->
+    <section class="attractions">
+        <div class="container">
+            <h2>Hotels Near Popular Attractions</h2>
+            <div class="attractions__grid" id="attractionsGrid">
+                <!-- Attractions will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotel Listings -->
+    <section class="hotels">
+        <div class="container">
+            <h2>Featured Hotels</h2>
+            <div class="hotels__grid" id="hotelsGrid">
+                <!-- Hotels will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <div class="footer__logo">
+                        <h3>Sikkim Hotels</h3>
+                        <p class="footer__tagline">Your Gateway to Mountain Paradise</p>
+                    </div>
+                    <p class="footer__description">
+                        Discover authentic Himalayan hospitality with stunning views of Kanchenjunga and rich cultural heritage. Experience the best of Sikkim's accommodation offerings.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" target="_blank" class="footer__social-link">Facebook</a>
+                        <a href="#" target="_blank" class="footer__social-link">Instagram</a>
+                        <a href="#" target="_blank" class="footer__social-link">Twitter</a>
+                        <a href="#" target="_blank" class="footer__social-link">YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__title">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Home</a></li>
+                        <li><a href="#" class="footer__link">Hotels</a></li>
+                        <li><a href="#" class="footer__link">Categories</a></li>
+                        <li><a href="#" class="footer__link">About Us</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__title">Popular Destinations</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Gangtok</a></li>
+                        <li><a href="#" class="footer__link">Pelling</a></li>
+                        <li><a href="#" class="footer__link">Lachung</a></li>
+                        <li><a href="#" class="footer__link">North Sikkim</a></li>
+                        <li><a href="#" class="footer__link">West Sikkim</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact Info</h4>
+                    <div class="footer__contact">
+                        <div class="footer__contact-item">
+                            <strong>Address:</strong>
+                            <p>MG Marg, Gangtok<br>Sikkim 737101, India</p>
+                        </div>
+                        <div class="footer__contact-item">
+                            <strong>Phone:</strong>
+                            <p>+91 3592 123456</p>
+                        </div>
+                        <div class="footer__contact-item">
+                            <strong>Email:</strong>
+                            <p>info@sikkimhotels.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <div class="footer__copyright">
+                    <p>&copy; 2025 Sikkim Hotels. All rights reserved.</p>
+                </div>
+                <div class="footer__legal">
+                    <a href="#" class="footer__link">Privacy Policy</a>
+                    <a href="#" class="footer__link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal hidden" id="loginModal">
+        <div class="modal__overlay" id="loginOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Sign In</h3>
+                <button class="modal__close" id="closeLogin">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal hidden" id="registerModal">
+        <div class="modal__overlay" id="registerOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Create Account</h3>
+                <button class="modal__close" id="closeRegister">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal hidden" id="bookingModal">
+        <div class="modal__overlay" id="bookingOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Book Your Stay</h3>
+                <button class="modal__close" id="closeBooking">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div id="selectedHotel">
+                    <!-- Selected hotel details will be populated here -->
+                </div>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label class="form-label">Guest Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Special Requests</label>
+                        <textarea class="form-control" rows="3" placeholder="Mountain view room, early check-in, etc."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-ui.js"></script>
+</body>
+</html>

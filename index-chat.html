@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sikkim Monasteries Digital Heritage</title>
+    <link rel="stylesheet" href="style-chat.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="breadcrumb">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Chatbot</span>
+                    </div>
+                    <h1>Sikkim Monasteries Digital Heritage</h1>
+                </div>
+                <div class="header-right">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Online</span>
+                    </div>
+                    <div class="language-toggle">
+                        <button id="language-btn" class="lang-btn">
+                            <span class="flag">🇬🇧</span>
+                            <span id="lang-text">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Monastery Carousel -->
+                <div class="monastery-carousel">
+                    <div class="carousel-header">
+                        <h3>Featured Monasteries</h3>
+                        <div class="carousel-controls">
+                            <button id="prev-btn" class="carousel-btn"><i class="fas fa-chevron-left"></i></button>
+                            <button id="next-btn" class="carousel-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="carousel-container">
+                        <div id="monastery-carousel" class="carousel-slides">
+                            <!-- Monastery slides will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="carousel-dots">
+                        <!-- Dots will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="9">0</div>
+                        <div class="stat-label">Monasteries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="360">0</div>
+                        <div class="stat-label">° Tours</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Access</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" data-query="features">
+                            <i class="fas fa-star"></i>
+                            <span>Features</span>
+                        </button>
+                        <button class="action-btn" data-query="map">
+                            <i class="fas fa-map"></i>
+                            <span>Map</span>
+                        </button>
+                        <button class="action-btn" data-query="audio guide">
+                            <i class="fas fa-headphones"></i>
+                            <span>Audio Guide</span>
+                        </button>
+                        <button class="action-btn" data-query="archives">
+                            <i class="fas fa-archive"></i>
+                            <span>Archives</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h3>Frequently Asked</h3>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <div class="faq-question" data-query="What is the history of Rumtek Monastery?">
+                                <span>History of Rumtek</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" data-query="How can I visit the monasteries?">
+                                <span>Visiting Information</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" data-query="What festivals are celebrated?">
+                                <span>Festival Calendar</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-area">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fas fa-robot"></i>
+                        <span>Monastery Guide Assistant</span>
+                    </div>
+                    <div class="chat-actions">
+                        <button id="search-btn" class="chat-action-btn" title="Search Messages">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button id="export-btn" class="chat-action-btn" title="Export Chat">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button id="clear-btn" class="chat-action-btn" title="Clear Chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Bar (Hidden by default) -->
+                <div id="search-bar" class="search-bar hidden">
+                    <input type="text" id="search-input" placeholder="Search messages...">
+                    <button id="search-close" class="search-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="chat-messages">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h2>Welcome to Sikkim Monasteries Digital Heritage</h2>
+                        <p>I'm your virtual guide to the sacred monasteries of Sikkim. Ask me anything about these spiritual treasures!</p>
+                        <div class="suggestion-chips">
+                            <button class="suggestion-chip" data-query="Tell me about the monasteries">Monastery Info</button>
+                            <button class="suggestion-chip" data-query="features">Platform Features</button>
+                            <button class="suggestion-chip" data-query="map">Interactive Map</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="typing-indicator hidden">
+                    <div class="typing-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-area">
+                    <div class="quick-suggestions" id="quick-suggestions" style="display: none;">
+                        <!-- Suggestions will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="input-container">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="message-input" 
+                                placeholder="Ask about Sikkim monasteries..." 
+                                autocomplete="off"
+                                maxlength="500"
+                            >
+                            <div class="input-actions">
+                                <button id="voice-btn" class="input-action-btn" title="Voice Input">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <button id="send-btn" class="input-action-btn primary" title="Send Message">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-footer">
+                            <span id="char-counter" class="char-counter">0/500</span>
+                            <span class="input-hint">Press Enter to send, Ctrl+L for language</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app-chat.js"></script>
+</body>
+</html>

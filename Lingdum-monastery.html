@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tashiding Monastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .bg-gradient-blue {
+            background-image: linear-gradient(90deg, #09346d 0%, #0c4d9b 100%);
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .embed-container { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+        } 
+        .embed-container iframe, .embed-container object, .embed-container embed { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-gradient-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <!-- Logo -->
+                <img src="360.jpg" alt="Monastery360" class="h-10 mr-4">
+                
+                <!-- Nav Links -->
+                <nav class="hidden lg:flex items-center space-x-6 text-base font-medium">
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/airplane-mode-on.png" class="h-6 w-6 mb-1" alt="Flights icon">
+                        <span class="group-hover:underline">Flights</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/building.png" class="h-6 w-6 mb-1" alt="Hotels icon">
+                        <span class="group-hover:underline">Hotels</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/home.png" class="h-6 w-6 mb-1" alt="Homestays icon">
+                        <span class="group-hover:underline">Homestays</span>
+                    </a>
+                    
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/train.png" class="h-6 w-6 mb-1" alt="Trains icon">
+                        <span class="group-hover:underline">Trains</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/bus.png" class="h-6 w-6 mb-1" alt="Buses icon">
+                        <span class="group-hover:underline">Buses</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/car.png" class="h-6 w-6 mb-1" alt="Cabs icon">
+                        <span class="group-hover:underline">Cabs</span>
+                    </a>
+                    
+                    <a href="#" class="flex flex-col items-center group">
+                        <img src="https://img.icons8.com/material-outlined/24/ffffff/travel-insurance.png" class="h-6 w-6 mb-1" alt="Travel Insurance icon">
+                        <span class="group-hover:underline">Travel Insurance</span>
+                    </a>
+                    <a href="#" class="flex items-center text-lg">
+                        <span>...</span>
+                    </a>
+                    <a href="#" class="flex items-center text-base">
+                        <span>More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Actions -->
+            <div id="auth-ui" class="flex items-center space-x-4">
+                <a id="login-btn-header" href="#" class="flex items-center text-base font-medium">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" class="h-6 w-6 mr-1" alt="User icon">
+                    <span>Login or Create Account</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Photo Banner Section -->
+    <div id="photo-banner" class="container mx-auto px-4 py-8 flex space-x-4 fade-in">
+        <!-- First div with Bhumchu festival video -->
+         <div id="first-div" class="flex-1 rounded-lg shadow-md overflow-hidden h-96 hover-lift transition-all duration-500">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="Lingdum-monastery-vdo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Third div with 360° view -->
+        <div id="third-div" class="flex-1 rounded-lg shadow-md overflow-hidden h-96 hover-lift transition-all duration-500 cursor-pointer">
+            <div class='embed-container'><iframe src='https://momento360.com/e/u/857492518722493bb643a1825c368de2?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true' style='border:0'></iframe></div>
+        </div>
+    </div>
+    
+    <!-- Tashiding Monastery Info Section -->
+    <main class="container mx-auto px-4 py-8 fade-in">
+        <section class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h1 class="text-4xl font-bold text-center text-gray-800">Lingdum Monastery</h1>
+            <p class="text-center text-gray-600 mt-4 mb-8 max-w-2xl mx-auto text-lg">Lingdum Monastery, also known as Ranka Monastery or Pal Zurmang Kagyud Monastery, is a relatively modern but profoundly spiritual site located in the peaceful village of Ranka, about an hour's drive from Gangtok in East Sikkim. Completed in 1999, it stands as a testament to the preservation and continuation of Tibetan Buddhist traditions in India. The monastery is known for its stunning architecture, serene setting amidst forested hills, and its vibrant monastic community. It is the principal seat of the Zurmang Kagyu lineage of Tibetan Buddhism, under the spiritual guidance of the 12th Zurmang Gharwang Rinpoche"</p>
+        </section>
+
+        <section id="history" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">History & Significance</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <p class="text-gray-700 mb-4 text-base">Modern Foundation: The monastery was built in the 1990s and inaugurated in 1999. It was established by the 12th Zurmang Gharwang Rinpoche to serve as the new seat of the Zurmang Kagyu tradition, which originated in Tibet in the 1300s.</p>
+                    <p class="text-gray-700 mb-4 text-base">Architectural Beauty: Built in the traditional Tibetan style, the monastery complex is spread over a sprawling 21 acres. Its main prayer hall is a visual feast, featuring intricate murals, statues, and thangka paintings. A giant, five-meter-tall gilded statue of Buddha and a smaller statue of Guru Padmasambhava are the central attractions inside the hall</p>
+                    <p class="text-gray-700 text-base">Training Center: Lingdum serves as a crucial training center for young monks, providing them with a space for religious studies and meditation. The sight of young, red-robed monks in the spacious courtyard is a common and charming sight for visitors</p>
+                </div>
+                <div class="md:w-1/2 rounded-lg pl-4">
+                    <img src="lindum-qr.png" alt="Tashiding Monastery building" class="w-[600px] pl-32">
+                </div>
+            </div>
+        </section>
+
+        <section id="rituals" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Festivals, Events, and Rituals</h2>
+            <p class="text-center text-gray-700 mb-6 text-base">The monastery comes alive during various festivals, which offer a glimpse into the living traditions of the Zurmang Kagyu lineage.</p>
+            <div class="grid grid-cols-1 gap-8">
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-red-500">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Losar (Tibetan New Year)</h3>
+                    <p class="text-gray-700 mb-4 text-base">Losar is the Tibetan New Year, the most important festival in the Tibetan Buddhist calendar. The festival marks the beginning of a new lunar year and is celebrated by Tibetans, Bhutanese, Sherpas, and other Himalayan communities. The word "Losar" is a combination of two Tibetan words: "Lo" (ལོ་) meaning year, and "Sar" (གསར་) meaning new. The festivities typically last for about 15 days, with the main celebrations taking place during the first three days. The festival is a time for family gatherings, rituals, and prayers for good fortune in the year to come</p>
+                    <ul class="list-disc ml-6 space-y-2 text-gray-700 text-base">
+                        <li> <b>Prayer Flags:</b> New prayer flags are hung to signify a fresh start and to spread good wishes and prayers on the wind.</li>
+                        <li> <b> Tsampa (Roasted Barley Flour):</b> A staple food in Tibet, tsampa is used in various rituals, including the throwing of an offering called "chemar" as a gesture of respect and goodwill</li>
+                       <li> <b> Incense: </b>The burning of fragrant incense is a common ritual throughout Losar to purify the air and make offerings to deities</li>
+                        <li> <b>Chaam Dance:</b> This sacred masked dance, performed by monks, is a core part of the Losar celebrations. It is a form of moving meditation that tells stories from Buddhist scriptures and purifies the environment.</li>
+                    </ul>
+                    </div>
+                   <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-purple-600">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Gutor Chaam</h3>
+                    <p class="text-gray-700 mb-4 text-base">Gutor Chaam is a sacred masked dance performed by monks of the Tibetan Buddhist tradition. It is a highly significant ritual that takes place on the 29th day of the last month of the Tibetan lunar calendar, which is typically a couple of days before the start of Losar (Tibetan New Year).
+
+</p>
+                    <ul class="list-disc ml-6 space-y-2 text-gray-700 text-base">
+                        <li> <b> Masks and Costumes:</b>The masks are a central element, transforming the monks into the deities they represent. The costumes are often bright and colorful, with intricate details</li>
+                        <li> <b> Movements:</b> The dance is not merely a performance; it is a form of moving meditation. The slow, deliberate steps and powerful leaps symbolize the deities' power to control and subdue malevolent forces.
+
+</li>
+                       <li> <b> Music: </b> The performance is accompanied by traditional Tibetan instruments, including cymbals, drums, and horns, which create a solemn and rhythmic sound that is integral to the ritual.</li>
+                    </ul>
+                    
+                </div>
+               
+            <div class="p-6 bg-gray-50 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">Other Important Festivals</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Saga Dawa</h4>
+                            <p class="text-gray-700 text-base">A major Buddhist festival celebrating the birth, enlightenment, and death of the Buddha. The monastery hosts special prayers and rituals.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Lhabab Duchen</h4>
+                            <p class="text-gray-700 text-base">Lhabab Duchen is a major Buddhist festival that commemorates the Buddha's descent from the heavenly realms. It's celebrated on the 22nd day of the ninth Tibetan lunar month, typically in October or November.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendar" class="bg-white p-8 rounded-lg shadow-lg mb-8 hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Annual Cultural Calendar</h2>
+            <p class="text-center text-gray-700 mb-6 text-base">Here is a structured cultural calendar for Tashiding Monastery, detailing the key events throughout the year:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-l-4 border-blue-600 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">January - March</h3>
+                    <h4 class="font-medium text-blue-700 mb-1">Losar (Tibetan New Year) & Gutor Chaam</h4>
+                    <p class="text-sm text-gray-600 mb-2"> <b>Date:</b> Varies (typically in January/February)</p>
+                    <p class="text-sm text-gray-700"> <b>Highlight:</b> The visually striking Gutor Chaam dance.</p>
+                </div>
+                <div class="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border-l-4 border-purple-600 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">April - June</h3>
+                    <h4 class="font-medium text-purple-700 mb-1">Saga Dawa</h4>
+                    <p class="text-sm text-gray-600 mb-2"><b>Date:</b> Varies (typically in May/June)</p>
+                    <p class="text-sm text-gray-700"><b>Highlight:</b> A time of deep spiritual devotion and merit-making celebrating the Buddha's life.</p>
+                </div>
+                <div class="p-6 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg border-l-4 border-teal-600 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">July - September</h3>
+                    <h4 class="font-medium text-teal-700 mb-1">Pang Lhabsol</h4>
+                    <p class="text-sm text-gray-600 mb-2"><b>Date:</b> Varies (typically in August/September)</p>
+                    <p class="text-sm text-gray-700"><b>Highlight:</b> The performance of the Pangtoed Chaam warrior dance honoring Mount Khangchendzonga.</p>
+                </div>
+                <div class="p-6 bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg border-l-4 border-amber-600 shadow-sm">
+                    <h3 class="font-semibold text-gray-800 mb-2 text-lg">October - December</h3>
+                    <h4 class="font-medium text-amber-700 mb-1">Lhabab Duchen</h4>
+                    <p class="text-sm text-gray-600 mb-2"><b>Date:</b> Varies (typically in October/November)</p>
+                    <p class="text-sm text-gray-700"><b>Highlight:</b> The monastery is adorned with butter lamps and special prayers commemorating the Buddha's descent from heavenly realms.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="visit-info" class="bg-white p-8 rounded-lg shadow-lg hover-lift">
+            <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Visiting the Monastery</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Visiting Hours & Entry -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Timings & Entry</h3>
+                    <ul class="space-y-2 text-gray-700 text-base">
+                        <li><b>Timings:</b> The monastery is generally open to visitors from <b>6:00 AM to 6:00 PM or dawn to dusk</b>.</li>
+                        <li><b>Entry Fee:</b> There is no entry fee, though donations are welcome.</li>
+                    </ul>
+                </div>
+                <!-- How to Get There -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Location & Access</h3>
+                    <ul class="space-y-2 text-gray-700 text-base">
+                        <li><b>Location:</b>  Lingdum is located in Ranka, about 20 km from Gangtok.</li>
+                        <li>The journey by car takes approximately one hour</li>
+                        <li><b>Transport:</b>  The road can be a bit bumpy, so it's advisable to hire a larger vehicle.</li>
+                    </ul>
+                </div>
+                <!-- Best Time to Visit -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Best Time to Visit</h3>
+                    <ul class="space-y-2 text-gray-700 text-base">
+                        <li><b>Spring (March-May):</b> This is an ideal time for nature lovers. </li>
+                        <li><b>Autumn (September-November):</b> Crystal-clear skies, stunning mountain views, perfect for outdoor activities</li>
+                        <li><b>Winter (December-February):</b> this is the best time to see snow-covered landscapes and experience a quiet, serene Sikkim</li>
+                    </ul>
+                </div>
+                <!-- Tips for Visitors -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm md:col-span-2 lg:col-span-3">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Tips for Visitors</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700 text-base">
+                        <li><b>Dress Code:</b> Visitors are expected to dress modestly, with shoulders and knees covered.</li>
+                        <li><b>Footwear:</b> Shoes should be removed before entering the main prayer hall.</li>
+                        <li><b>Atmosphere:</b> The monastery is a serene place; visitors are advised to maintain silence and respect the spiritual environment.</li>
+                        <li><b>Photography:</b> Photography may be restricted in some areas - always ask for permission.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-gray-300 py-10 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Popular Holiday Packages -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Popular Holiday Packages</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Darjeeling Tour Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Sikkim Tour Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Dooars Wildlife Tours</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Bhutan Heritage Tours</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Kalimpong Tour Packages</a></li>
+                    </ul>
+                </div>
+                <!-- Travel Services -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Travel Services</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Tailored Holiday Packages</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Car Rental & Transport</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Government Resorts</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Hotel & Homestay Booking</a></li>
+                        <li><a href="#" class="flex items-center hover:text-world transition-colors"><span class="mr-2">&gt;</span> Services We Provide</a></li>
+                    </ul>
+                </div>
+                <!-- Explore Destinations -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Explore Destinations</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Top Tourist Attractions</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Unexplored Destinations</a></li>
+                    </ul>
+                </div>
+                <!-- Get in Touch -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get in Touch</h3>
+                    <div class="text-sm space-y-2">
+                        <p class="text-white">North Bengal Tourism®</p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/new-post.png" alt="Email icon" class="w-4 h-4 mr-2"> <a href="#" class="hover:text-white transition-colors">help@northbengaltourism.com</a></p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/phone.png" alt="Phone icon" class="w-4 h-4 mr-2"> <span>+91 81455 84286</span></p>
+                        <p class="flex items-center"><img src="https://img.icons8.com/material-outlined/24/ffffff/marker.png" alt="Location icon" class="w-4 h-4 mr-2"> <span>Siliguri, West Bengal, India</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Row of Footer -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <!-- About Our Company -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">About Our Company</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Who We Are</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Contact Us</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Travel Blog</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Help & FAQs</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Client Testimonials</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Our Achievements</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Careers & Opportunities</a></li>
+                    </ul>
+                </div>
+                <!-- Our Policies -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Our Policies</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Legal Disclaimer</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Cancellation & Refund Policy</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Privacy & Data Protection</a></li>
+                        <li><a href="#" class="flex items-center hover:text-white transition-colors"><span class="mr-2">&gt;</span> Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
+                <p>&copy; 2024 North Bengal Tourism. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstDiv = document.getElementById('first-div');
+            const thirdDiv = document.getElementById('third-div');
+            let isExpanded = false;
+
+            thirdDiv.addEventListener('click', () => {
+                if (isExpanded) {
+                    // Revert to original state
+                    firstDiv.classList.remove('hidden');
+                    firstDiv.classList.add('flex-1');
+                    thirdDiv.classList.remove('w-full');
+                    thirdDiv.classList.add('flex-1');
+                    isExpanded = false;
+                } else {
+                    // Expand the third div and hide the first one
+                    firstDiv.classList.remove('flex-1');
+                    firstDiv.classList.add('hidden');
+                    thirdDiv.classList.remove('flex-1');
+                    thirdDiv.classList.add('w-full');
+                    isExpanded = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
